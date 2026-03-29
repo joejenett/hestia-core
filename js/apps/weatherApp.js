@@ -22,7 +22,7 @@ export class WeatherApp extends BaseApp {
         const lon = app.data.lon || -0.1278;
 
         try {
-            const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+            const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=fahrenheit`);
             const data = await res.json();
 
             const temp = Math.round(data.current_weather.temperature);
@@ -35,7 +35,7 @@ export class WeatherApp extends BaseApp {
             const row = el.querySelector('.weather-row');
             row.style.display = 'flex';
 
-            row.querySelector('.weather-temp').innerText = `${temp}°C`;
+            row.querySelector('.weather-temp').innerText = `${temp}°F`;
             row.querySelector('.weather-icon').className = `weather-icon fa-solid ${iconClass}`;
 
         } catch (err) {
